@@ -1,0 +1,57 @@
+body  {
+    font-family: Arial, sans-serif;
+    background-image: url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/zapatillas-hombre-air-jordan-1-zoom-racer-blue-de-nike-1-1583490808.jpg);
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 1020px;
+}
+.login-form {
+    background-color: grey;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(66, 7, 7);
+    width: 300px;
+    border: 2px solid #333; /* Borde gris oscuro */
+}
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #000000;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgb(66, 7, 7);
+}
+
+.inicio{
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgb(66, 7, 7);
+    background-color: #1a150e;
+    color: #ffffff;
+    cursor: pointer;
+    height: 15px;
+    text-decoration-line: none;
+    display: inline-block;
+    margin-top: 10px; 
+    font-weight:400;
+}
+.sesion{
+    color: #f7f5f5;
+    font-size: 150%;
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+.login-form input:invalid + a {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: default;
+}
