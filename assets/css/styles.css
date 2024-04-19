@@ -45,7 +45,7 @@ nav a {
     background-color: #979797;
     border-radius: 20px;
     border: 8px solid  #323535; 
-    height: 700px;
+    height: 800px;
 }
 .carousel-item img {
     height: 700px; 
@@ -56,4 +56,10 @@ nav a:hover {
 }
 .btn-boton{
     background-color: #f3f3f1;
+}
+
+.btn_inicio{
+    margin-left: 90%;
+    color:#000000;
+    font-size: large;
 }
