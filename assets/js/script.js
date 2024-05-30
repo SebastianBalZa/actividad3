@@ -14,7 +14,7 @@ const enviarDatos = (series, id, name, img, model, price) => {
       imagePage.classList.add("card-img-top");
 
       const titlePage = doc.getElementById("titlePage");
-      titlePage.textContent = `Nombre: ${name}`;
+      titlePage.textContent = `Marca: ${name}`;
 
       const subtitlePage1 = doc.getElementById("subtitlePage");
       subtitlePage1.textContent = `Modelo: ${model}`;
@@ -49,7 +49,7 @@ const createCards = (results = []) => {
 
     const title = document.createElement("h5");
     title.classList.add("text-title");
-    title.textContent = `Nombre: ${name}`;
+    title.textContent = `Marca: ${name}`;
 
     const subtitle = document.createElement("p");
     subtitle.classList.add("text-title");
