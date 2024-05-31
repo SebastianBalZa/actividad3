@@ -1,5 +1,17 @@
 import { getZapas } from "./getZapas.js";
 
+let carrito = [];
+
+const actualizarCarritoIcon = () => {
+  const carritoIcon = document.getElementById('carritoIcon');
+  carritoIcon.innerHTML = `<img src="./assets/img/carrito.png" alt="Carrito de compras" width="30" height="30"> (${carrito.length})`;
+};
+
+const agregarAlCarrito = (zapatilla) => {
+  carrito.push(zapatilla);
+  actualizarCarritoIcon();
+};
+
 const enviarDatos = (series, id, name, img, model, price) => {
   const archivoHTML = "../index.html";
   fetch(archivoHTML)
@@ -61,9 +73,10 @@ const createCards = (results = []) => {
 
     const btnVer = document.createElement("button");
     btnVer.classList.add("btn", "btn-dark");
-    btnVer.textContent = "Ver más";
+    btnVer.textContent = "Agregar al carro";
     btnVer.addEventListener("click", () => {
       enviarDatos(series, id, name, img, model, price);
+      agregarAlCarrito(result);
     });
 
     divCol.appendChild(card);
@@ -85,3 +98,7 @@ getZapas()
   .catch((error) => {
     console.log(`Error: ${error}`);
   });
+
+document.addEventListener('DOMContentLoaded', () => {
+  actualizarCarritoIcon();
+});

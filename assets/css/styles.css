@@ -1,15 +1,14 @@
 body {
     background-color: #d0d4d4;
-    
 }
 
-header{
+header {
     background-color: #d0d4d4;
     color: #000000;
     padding: 10px 0;
     text-align: center;
     height: 90px;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 nav {
@@ -31,8 +30,8 @@ nav a {
     -moz-text-stroke-color: #ec1717;
     -webkit-text-stroke-color: #000000;
     text-align: center;
-  }
-  
+}
+
 .container {
     display: flex;
 }
@@ -44,22 +43,25 @@ nav a {
     margin: 10px;
     background-color: #979797;
     border-radius: 20px;
-    border: 8px solid  #323535; 
+    border: 8px solid #323535;
     height: 550px;
 }
+
 .carousel-item img {
     height: 700px; 
     object-fit: cover; 
 }
+
 nav a:hover {
     filter: brightness(50%);
 }
-.btn-boton{
+
+.btn-boton {
     background-color: #f3f3f1;
 }
 
-.btn_inicio{
-    margin-left: 90%;
-    color:#000000;
+.btn_inicio {
+    margin-left: -90%;
+    color: #000000;
     font-size: large;
 }
