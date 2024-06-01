@@ -7,9 +7,30 @@ const actualizarCarritoIcon = () => {
   carritoIcon.innerHTML = `<img src="./assets/img/carrito.png" alt="Carrito de compras" width="30" height="30"> (${carrito.length})`;
 };
 
+const mostrarNotificacion = (mensaje) => {
+  const notificationContainer = document.getElementById('notification-container');
+  const notification = document.createElement('div');
+  notification.className = 'alert alert-success alert-dismissible fade show';
+  notification.role = 'alert';
+  notification.innerHTML = `
+    ${mensaje}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  `;
+  notificationContainer.appendChild(notification);
+
+  setTimeout(() => {
+    notification.classList.remove('show');
+    notification.classList.add('hide');
+    notification.addEventListener('transitionend', () => {
+      notification.remove();
+    });
+  }, 3000);
+};
+
 const agregarAlCarrito = (zapatilla) => {
   carrito.push(zapatilla);
   actualizarCarritoIcon();
+  mostrarNotificacion("Zapatilla agregada al carrito");
 };
 
 const enviarDatos = (series, id, name, img, model, price) => {

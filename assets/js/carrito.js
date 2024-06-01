@@ -6,6 +6,6 @@ export const agregarAlCarrito = (producto) => {
 };
 
 const actualizarCarritoIcon = () => {
-  const carritoIcon = document.getElementById('carritoIcon');
-  carritoIcon.innerHTML = `<img src="./assets/img/carrito.png" alt="Carrito de compras" width="30" height="30"> (${carrito.length})`;
+  const cartCount = document.getElementById('cart-count');
+  cartCount.textContent = `(${carrito.length})`;
 };

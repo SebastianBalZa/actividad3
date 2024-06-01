@@ -6,9 +6,17 @@ header {
     background-color: #d0d4d4;
     color: #000000;
     padding: 10px 0;
-    text-align: center;
     height: 90px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    flex-grow: 1;
+    text-align: center;
+    margin: 0;
 }
 
 nav {
@@ -61,7 +69,11 @@ nav a:hover {
 }
 
 .btn_inicio {
-    margin-left: -90%;
+    margin-left: 0;
     color: #000000;
     font-size: large;
+}
+
+.carrito {
+    margin-left: auto;
 }
