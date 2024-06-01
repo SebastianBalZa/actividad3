@@ -1,11 +1,5 @@
 import { getZapas } from "./getZapas.js";
-
-let carrito = [];
-
-const actualizarCarritoIcon = () => {
-  const carritoIcon = document.getElementById('carritoIcon');
-  carritoIcon.innerHTML = `<img src="./assets/img/carrito.png" alt="Carrito de compras" width="30" height="30"> (${carrito.length})`;
-};
+import { carrito, agregarAlCarrito, actualizarCarritoIcon, eliminarDelCarrito } from "./carrito.js";
 
 const mostrarNotificacion = (mensaje) => {
   const notificationContainer = document.getElementById('notification-container');
@@ -27,99 +21,95 @@ const mostrarNotificacion = (mensaje) => {
   }, 3000);
 };
 
-const agregarAlCarrito = (zapatilla) => {
-  carrito.push(zapatilla);
-  actualizarCarritoIcon();
-  mostrarNotificacion("Zapatilla agregada al carrito");
+const actualizarCarritoModal = () => {
+  const carritoList = document.getElementById('carritoList');
+  carritoList.innerHTML = '';
+  carrito.forEach((item, index) => {
+    const listItem = document.createElement('li');
+    listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+    listItem.innerHTML = `
+      <div>
+        Marca: ${item.name}, Modelo: ${item.model}, Precio: ${item.price}
+      </div>
+      <button class="btn btn-danger btn-sm" onclick="eliminarDelCarrito(${index})">Eliminar</button>
+    `;
+    carritoList.appendChild(listItem);
+  });
 };
 
-const enviarDatos = (series, id, name, img, model, price) => {
-  const archivoHTML = "../index.html";
-  fetch(archivoHTML)
-    .then(response => response.text())
-    .then((html) => {
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, "text/html");
+const handleAgregarAlCarrito = (zapatilla) => {
+  agregarAlCarrito(zapatilla);
+  mostrarNotificacion("Zapatilla agregada al carrito");
+  actualizarCarritoModal();
+};
 
-      const imagePage = doc.getElementById("imagePage");
-      imagePage.src = img;
-      imagePage.alt = `imagen de ${name}`;
-      imagePage.classList.add("card-img-top");
-
-      const titlePage = doc.getElementById("titlePage");
-      titlePage.textContent = `Marca: ${name}`;
-
-      const subtitlePage1 = doc.getElementById("subtitlePage");
-      subtitlePage1.textContent = `Modelo: ${model}`;
-
-      const subtitlePage2 = doc.getElementById("subtitlePage2");
-      subtitlePage2.textContent = `Precio: ${price}`;
-
-      const nuevoHTML = new XMLSerializer().serializeToString(doc);
-      document.body.innerHTML = nuevoHTML;
-    });
+const handleVerMas = (zapatilla) => {
+  localStorage.setItem('detalleZapatilla', JSON.stringify(zapatilla));
+  window.location.href = 'detalle.html';
 };
 
 const createCards = (results = []) => {
   let zapatillasRow = document.getElementById("zapatillasRow");
 
   results.forEach((result) => {
-    const { series, id, name, img, model, price } = result;
+    const { id, name, img, model, price } = result;
 
     const divCol = document.createElement("div");
-    divCol.classList.add("col-xl-3", "col-lg-3", "col-md-3", "col-sm-12", "col-xs-12", "mt-2", "mb-2");
+    divCol.classList.add("col-xl-3", "col-lg-3", "col-md-3", "col-sm-6", "col-12", "mb-3"); // Agrega la clase mb-3 para añadir margen inferior
 
     const card = document.createElement("div");
-    card.classList.add("card");
+    card.classList.add("card", "h-100");
 
-    const imge = document.createElement("img");
-    imge.src = img;
-    imge.alt = `imagen de ${name}`;
-    imge.classList.add("card-img-top");
+    const cardImg = document.createElement("img");
+    cardImg.classList.add("card-img-top");
+    cardImg.src = img;
+    cardImg.alt = name;
 
-    const divBody = document.createElement("div");
-    divBody.classList.add("card-body");
+    const cardBody = document.createElement("div");
+    cardBody.classList.add("card-body");
 
-    const title = document.createElement("h5");
-    title.classList.add("text-title");
-    title.textContent = `Marca: ${name}`;
+    const cardTitle = document.createElement("h5");
+    cardTitle.classList.add("card-title");
+    cardTitle.textContent = name;
 
-    const subtitle = document.createElement("p");
-    subtitle.classList.add("text-title");
-    subtitle.textContent = `Modelo: ${model}`;
+    const cardText = document.createElement("p");
+    cardText.classList.add("card-text");
+    cardText.textContent = `Modelo: ${model}`;
 
-    const subtitle2 = document.createElement("p");
-    subtitle2.classList.add("text-title");
-    subtitle2.textContent = `Precio: ${price}`;
+    const cardPrice = document.createElement("p");
+    cardPrice.classList.add("card-text");
+    cardPrice.textContent = `Precio: ${price}`;
 
-    const btnVer = document.createElement("button");
-    btnVer.classList.add("btn", "btn-dark");
-    btnVer.textContent = "Agregar al carro";
-    btnVer.addEventListener("click", () => {
-      enviarDatos(series, id, name, img, model, price);
-      agregarAlCarrito(result);
-    });
+    const addToCartButton = document.createElement("button");
+    addToCartButton.classList.add("btn", "btn-dark", "m-1");
+    addToCartButton.textContent = "Agregar al carrito";
+    addToCartButton.onclick = () => handleAgregarAlCarrito(result);
+
+    const verMasButton = document.createElement("button");
+    verMasButton.classList.add("btn", "btn-dark", "m-1");
+    verMasButton.textContent = "Ver Más";
+    verMasButton.onclick = () => handleVerMas(result);
+
+    cardBody.appendChild(cardTitle);
+    cardBody.appendChild(cardText);
+    cardBody.appendChild(cardPrice);
+    cardBody.appendChild(addToCartButton);
+    cardBody.appendChild(verMasButton);
+
+    card.appendChild(cardImg);
+    card.appendChild(cardBody);
 
     divCol.appendChild(card);
-    card.appendChild(imge);
-    card.appendChild(divBody);
-    divBody.appendChild(title);
-    divBody.appendChild(subtitle);
-    divBody.appendChild(subtitle2);
-    divBody.appendChild(btnVer);
-
     zapatillasRow.appendChild(divCol);
   });
 };
 
-getZapas()
-  .then((data) => {
-    createCards(data);
-  })
-  .catch((error) => {
-    console.log(`Error: ${error}`);
-  });
+getZapas().then(createCards);
 
-document.addEventListener('DOMContentLoaded', () => {
-  actualizarCarritoIcon();
-});
+window.eliminarDelCarrito = (index) => {
+  eliminarDelCarrito(index);
+  mostrarNotificacion("Zapatilla eliminada del carrito");
+  actualizarCarritoModal();
+};
+
+actualizarCarritoIcon();

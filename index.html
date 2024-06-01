@@ -16,8 +16,9 @@
       </div>
       <h1 class="text-center flex-grow-1">Zapatillas San Antonio</h1>
       <div class="d-flex align-items-center">
-        <a href="#" id="carritoIcon" class="carrito ms-3">
+        <a href="#" id="carritoIcon" class="carrito ms-3" data-bs-toggle="modal" data-bs-target="#carritoModal">
           <img src="./assets/img/carrito.png" alt="Carrito de compras" width="30" height="30">
+          <span id="cart-count">(0)</span>
         </a>
       </div>
     </header>
@@ -55,15 +56,38 @@
     </div>
   </div>
   <h1 class="t-stroke">Zapatillas Disponibles</h1>
-  
-  <div class="container">
-    <div class="row" id="zapatillasRow">
-
+  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+    <div class="container">
+      <div class="row" id="zapatillasRow">
+        <!-- Las tarjetas de las zapatillas se agregarán aquí dinámicamente -->
+      </div>
     </div>
   </div>
 
+
   <div id="notification-container" class="position-fixed top-0 end-0 p-3" style="z-index: 1050;"></div>
-  
+
+
+  <div class="modal fade" id="carritoModal" tabindex="-1" aria-labelledby="carritoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="carritoModalLabel">Carrito de Compras</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul id="carritoList" class="list-group">
+
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary">Finalizar Compra</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script type="module" src="./assets/js/script.js"></script>
 </body>
